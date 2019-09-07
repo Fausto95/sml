@@ -117,3 +117,21 @@ fun silly1(z: int) =
     if x > y then x * 2 else y * y
   end
 ```
+
+---------
+
+### Nested Functions
+
+```sml
+fun countup_from1_3(x: int) =
+  let
+    fun count(from: int) =
+      if from = x
+      then x::[]
+      else from :: count(from + 1)
+  in
+    count(1)
+  end
+```
+
+---------
