@@ -1,4 +1,4 @@
-# This are my personal notes that I'm taking while learning Standard ML
+# These are my personal notes that I'm taking while learning Standard ML
 
 
 ### Variables Bindings
@@ -95,3 +95,25 @@ val list = [2, 3, 4];
 ```
 
 
+---------
+
+
+### Let Expressions(Scope)
+
+ - Syntax
+
+```sml
+let b1 b2 ... bn in e end
+```
+
+Each <b>bi</b> is any binding and <b>e</b> is any expression(body)
+
+```sml
+fun silly1(z: int) =
+  let
+    val x = if z > 0 then z else 34
+    val y = x + z + 9
+  in
+    if x > y then x * 2 else y * y
+  end
+```
