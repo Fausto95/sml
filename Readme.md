@@ -135,3 +135,67 @@ fun countup_from1_3(x: int) =
 ```
 
 ---------
+
+### Options
+
+ - t option is a type for any type t
+  - (much like t list, but different type, not a list)
+
+Building:
+  - NONE has type 'a(alpha) option (much like [] has type 'a list)
+  - SOME e has type t option if e has type t (much like e::[])
+
+Accessing:
+  - isSome has type 'a option -> bool
+  - valOf has type 'a option -> 'a (exception if given NONE)
+
+
+---------
+
+### Boolean Operations
+
+e1 `andalso` e2
+e1 `orelse` e2
+
+`not` e1
+
+Equivalents
+
+
+
+```sml
+(* el andalso e2 *)
+if e1
+then 2
+else false
+```
+
+```sml
+(* el orelse e2 *)
+if e1
+then true
+else e2
+```
+
+```sml
+(* not e1 *)
+if e1
+then false
+else true
+```
+
+---------
+
+### Comparisons
+
+- Equality `=`
+- Not Equal `<>`
+- Greater than `>`
+- Less than `<`
+- Greater than or equal `>=`
+- Less than or equal `<=`
+
+> '>' < >= <= can be used with real(float), but not 1 int and 1 real(float)
+
+> = <> can be used with any "equality type" but not with real(float)
+
