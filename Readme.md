@@ -1,6 +1,7 @@
-# Standard ML
+# This are my personal notes that I'm taking while learning Standard ML
 
-In SML, variables are declared using the keyword `val`.
+
+### Variables Bindings
 
 ```sml
 val a = 2;
@@ -22,8 +23,10 @@ Syntax:
   - Type-check expression and extends static environment
   - Evaluate expression and extend dynamic environment
 
-----------------------------------
-# Conditional Expressions
+---------
+
+
+### Conditional Expressions
 
 ```sml
   if y = 0
@@ -41,9 +44,11 @@ Type-checking:
   must have the same type t
   the type of the entire expression is also t
 
+---------
 
-----------------------------------
-# Functions
+### Functions
+
+Functions are created using the keyword `fun`
 
 ```sml
 fun pow(x: int, y: int) =
@@ -52,9 +57,41 @@ fun pow(x: int, y: int) =
   else x * pow(x, y - 1)
 ```
 
+```sml
+pow(2, 3);
+```
 Unless a function has one argument, we need to use parentheses to call it
 
-----------------------------------
+---------
 
-Rules for Expressions
+### Tuples
+
+
+Tuples are created using parenthesis `(24, "Faustino")`
+
+```sml
+val tuples = (24, "Faustino");
+```
+
+Accessing tuple elements
+
+```sml
+fun swap(pr: int * bool ) =
+  (#2 pr, #1 pr)
+```
+```sml
+swap(2, true)
+```
+
+---------
+
+### Lists
+
+Lists are declared using brackers `[]`. Lists elements must have the same type
+
+
+```sml
+val list = [2, 3, 4];
+```
+
 
