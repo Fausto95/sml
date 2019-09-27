@@ -1,6 +1,22 @@
 # These are my personal notes that I'm taking while learning Standard ML
 
 
+### REPL
+https://www.smlnj.org/doc/interact.html
+
+#### launching the repl
+
+```bash
+sml
+```
+To use a file in the repl, simply:
+
+```
+use "filename.sml";
+```
+
+----
+
 ### Variables Bindings
 
 ```sml
@@ -70,10 +86,14 @@ Unless a function has one argument, we need to use parentheses to call it
 Tuples are created using parenthesis `(24, "Faustino")`
 
 ```sml
-val tuples = (24, "Faustino");
+val tuples = (24, "Faustino")
 ```
 
 Accessing tuple elements
+
+```sml
+#2 tuples;
+```
 
 ```sml
 fun swap(pr: int * bool ) =
@@ -91,7 +111,7 @@ Lists are declared using brackers `[]`. Lists elements must have the same type
 
 
 ```sml
-val list = [2, 3, 4];
+val list = [2, 3, 4]
 ```
 
 
@@ -199,3 +219,98 @@ else true
 
 > = <> can be used with any "equality type" but not with real(float)
 
+
+---------
+
+### 2nd Week
+
+### Building bigger types
+
+Base types are:
+
+- int
+- bool
+- unit
+- char
+
+Ways to build compound types: tuples, lists, options.
+
+
+3 most important type building-blocks in any language
+
+- "Each of": A `t` value contains values of each of `t1` `t2` .. `tn`
+- "One of": A `t` value contains values of one of `t1` `t2` .. `tn`
+- "Self reference": A `t` value can refer to other `t` values
+
+Compound types, are ways that you build new types with other types inside of them.
+
+----
+
+Which of the following concepts would be appropriate to represent using just an "each of" type?
+- [x] The position of an object in 3-space
+  > The position of an object can easily be represented by each of an x, y, and z coordinates. Likewise, the first and last names of a person can be easily represented as each of the first and last names. However, the status of a printer is either printing, or ready, or jammed, or on fire, etc, which doesn't fit well into an each of type. Finally, the length of a list is just simply a count, and doesn't need an each of type.
+- [ ] Isso deve ser selecionado
+
+- [ ] The status of a printer (printing, ready, jammed, on fire, etc...)
+
+- [ ] Não selecionado está correto
+
+- [ ] The length of a list
+
+- [ ] ão selecionado está correto
+
+- [x] The first and last names of a person
+  > The position of an object can easily be represented by each of an x, y, and z coordinates. Likewise, the first and last names of a person can be easily represented as each of the first and last names. However, the status of a printer is either printing, or ready, or jammed, or on fire, etc, which doesn't fit well into an each of type. Finally, the length of a list is just simply a count, and doesn't need an each of type.
+
+----
+
+Which of the following concepts would be appropriate to represent using just a "one of" type?
+
+- [ ] The particular flavor of ice cream in a bowl (assuming, of course, that bowls only hold one flavor of ice cream)
+  >A bowl of ice cream has one of the many possible flavors. Likewise, the current weather is one of many possible values. However, the set of students that showed up to class is not easily represented by a "one of" type, and the current rabbit population needs nothing more than a simple count for representation.
+
+
+- [ ] The set of students who actually showed up to class today
+- [x] The current weather (sunny, partly cloudy, rainy, hurricane, etc...)
+  > A bowl of ice cream has one of the many possible flavors. Likewise, the current weather is one of many possible values. However, the set of students that showed up to class is not easily represented by a "one of" type, and the current rabbit population needs nothing more than a simple count for representation.
+
+- [ ] The current rabbit population in a park
+
+
+
+----
+
+Examples
+
+  * Tuples build each-of types
+    - `int` * `bool` contains an `int` and a `bool`
+  * Options build one-of types
+    - `int option` contains an `int` or it contains no data
+  * Lists use all three building blocks
+    - `int list` contains an `int` and another `int list` or it contains no data
+  * And of course we can nest compound types
+    - `((int * int) option * (int list list)) option`
+
+----
+
+
+Another way to build each-of types in ML:
+  - Recods: have named fields and indexes
+  - Connection to tuples and idea of syntactic sugar
+
+
+### Records
+
+```sml
+val x = {
+  bar = (1 + 2, true andalso true) ,
+  foo = 3 + 4,
+  baz = (false, 9)
+}
+
+val me = {age=24, name="Faustino"} : {age: int, name: string}
+
+(* Accessing records elements *)
+#name me
+
+```
