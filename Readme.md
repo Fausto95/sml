@@ -312,5 +312,103 @@ val me = {age=24, name="Faustino"} : {age: int, name: string}
 
 (* Accessing records elements *)
 #name me
+```
+Tuples as Syntactic Sugar
+
+```sml
+val me = {age=24, name="Faustino"} : {age: int, name: string}
+
+val a_pair = (5 + 5, 3 + 3)
+
+val a_record = {second = 2 + 2, first = 2 + 1} (* first:int, second: int *)
+val b_pair = {2 = 5, 1 = 6} (* (int * int) *) (* (6, 5) *)
+
+#1 a_pair + 2 b_pair (* 9: int *)
+
+val x = {3 = "hi", 1 = true, 2 = 3 + 2} (* (true, 5, "hi") *)
 
 ```
+
+----
+
+
+### Data Types Bindings
+
+Tag: Constructor
+Data: the corresponding data part
+
+```sml
+datatype my_own_type = TwoInts of int * int
+  | Str of string
+  | Pizza
+
+val a = Str "hi"
+val b = Str
+val c = Pizza
+val d = TwoInts(2 + 1, 3)
+val e = a
+```
+
+### Case Expressions
+
+Concept to access made up from the types we introduced with data type bindings
+
+Example:
+
+```sml
+fun f x = (* f has type my_own_type -> int*)
+  case x of
+    Pizza => 3
+  | TwoInts(i1, i2) => i1 + i2
+  | Str s => String.size s
+```
+
+
+#### Expression Trees
+
+```sml
+datatype exp = Constant of int
+  | Negate of exp
+  | Add of exp * exp
+  | Multiply exp * exp
+```
+
+An expression in ML of type:
+`Add (Constant (10 + 9), Negate (Constant 4)`
+
+Picturing the resulting value:
+
+```
+            Add
+    Constant    Negate
+      19       Constant
+                  4
+```
+
+
+### Pattern Matching
+
+```sml
+fun max_constant3 e =
+  let fun max_of_two(e1, e2) = Int.max(max_constant3 e1, max_constant3 e2)
+  in
+  case e of
+    Constant i => i
+  | Negate e2 => max_constant3 e2
+  | Add(e1, e2) => max_of_two(e1, e2)
+  | Multiply(e1, e2) => max_of_two(e1, e2)
+  end
+```
+
+
+### Recursive Datatypes
+
+```sml
+(* Options *)
+
+fun inc_or_zero intoption =
+  case intoption of
+    NONE => 0
+    | SOME i => i + 1
+```
+
